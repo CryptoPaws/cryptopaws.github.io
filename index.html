@@ -1,1 +1,69 @@
-Test
+<html>
+<head>
+    <style>body, html {
+        margin: 0px;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    canvas {
+        width: 100%;
+        height: 100%;
+    }</style>
+</head>
+<body>
+<div id="area" style="border:5px solid red; width: 800px; height: 600px"></div>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://d157l7jdn8e5sf.cloudfront.net/release/pixi.js"></script>
+<script src="pixi-spine.js"></script>
+<script>window.onload = function () {
+  var app = new PIXI.Application();
+  document.getElementById('area').appendChild(app.view)
+
+// load spine data
+  PIXI.loader
+    .add('dog1', 'dogs/dog1_skeleton.json')
+    .load(onAssetsLoaded);
+
+  app.stage.interactive = true;
+  app.stage.buttonMode = true;
+
+  function onAssetsLoaded(loader, res) {
+    console.log(res);
+    var goblin = new PIXI.spine.Spine(res.dog1.spineData);
+
+    // set current skin
+    goblin.skeleton.setSkinByName('dog1_skin');
+    // goblin.skeleton.setSlotsToSetupPose();
+
+    // set the position
+    goblin.x = app.screen.width / 2;
+    // goblin.y = app.screen.height;
+
+    goblin.scale.set(1.5);
+
+    // set up the mixes!
+    // goblin.stateData.setMix('neutral_breth', 'head_l', 0.2);
+    // goblin.stateData.setMix('head_l', 'neutral_breth', 0.4);
+
+    // play animation
+    // goblin.state.setAnimation(0, 'neutral_breth', true);
+
+    app.stage.addChild(goblin);
+
+    app.stage.on('pointertap', function () {
+      // change current skin
+      console.log('wgt>!');
+      var currentSkinName = goblin.skeleton.skin.name;
+      var newSkinName = (currentSkinName === 'goblin' ? 'goblingirl' : 'goblin');
+      goblin.skeleton.setSkinByName(newSkinName);
+      goblin.skeleton.setSlotsToSetupPose();
+    });
+    console.log(document.body);
+  }
+
+
+}</script>
+
+</body>
+</html>

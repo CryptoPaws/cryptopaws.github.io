@@ -1,0 +1,90 @@
+
+dog1_skeleton.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dog1_skeleton/dog1_skin/back-left-leg
+  rotate: false
+  xy: 2, 2
+  size: 140, 233
+  orig: 140, 233
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/back-right-leg
+  rotate: false
+  xy: 423, 340
+  size: 127, 238
+  orig: 127, 238
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/chest
+  rotate: false
+  xy: 2, 237
+  size: 279, 341
+  orig: 279, 341
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/collar
+  rotate: true
+  xy: 764, 690
+  size: 301, 85
+  orig: 301, 85
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/head
+  rotate: false
+  xy: 2, 580
+  size: 591, 411
+  orig: 591, 411
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/left-eye
+  rotate: false
+  xy: 851, 935
+  size: 53, 56
+  orig: 53, 56
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/left-front-leg
+  rotate: false
+  xy: 283, 253
+  size: 138, 325
+  orig: 138, 325
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/mouth_tongue
+  rotate: false
+  xy: 595, 626
+  size: 126, 37
+  orig: 126, 37
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/nose
+  rotate: true
+  xy: 552, 511
+  size: 67, 34
+  orig: 67, 34
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/right-eye
+  rotate: false
+  xy: 423, 282
+  size: 53, 56
+  orig: 53, 56
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/right-front-leg
+  rotate: false
+  xy: 595, 665
+  size: 167, 326
+  orig: 167, 326
+  offset: 0, 0
+  index: -1
+dog1_skeleton/dog1_skin/tail
+  rotate: false
+  xy: 144, 49
+  size: 183, 186
+  orig: 183, 186
+  offset: 0, 0
+  index: -1

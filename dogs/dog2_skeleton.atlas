@@ -1,0 +1,118 @@
+
+dog2_skeleton.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dog2_skeleton/dog1_skin/back-left-leg
+  rotate: true
+  xy: 2, 35
+  size: 158, 290
+  orig: 158, 290
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/back-right-leg
+  rotate: false
+  xy: 777, 688
+  size: 140, 291
+  orig: 140, 291
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/chest
+  rotate: false
+  xy: 2, 195
+  size: 333, 409
+  orig: 333, 409
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/collar
+  rotate: true
+  xy: 919, 663
+  size: 316, 92
+  orig: 316, 92
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/ear-left
+  rotate: false
+  xy: 619, 408
+  size: 131, 227
+  orig: 131, 227
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/ear-right
+  rotate: false
+  xy: 467, 408
+  size: 150, 227
+  orig: 150, 227
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/eyebrow-left
+  rotate: false
+  xy: 396, 606
+  size: 47, 29
+  orig: 47, 29
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/eyebrow-right
+  rotate: false
+  xy: 777, 657
+  size: 47, 29
+  orig: 47, 29
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/head
+  rotate: false
+  xy: 2, 606
+  size: 392, 373
+  orig: 392, 373
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/left-front-leg
+  rotate: true
+  xy: 396, 809
+  size: 170, 379
+  orig: 170, 379
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/let-eye
+  rotate: false
+  xy: 337, 266
+  size: 57, 55
+  orig: 57, 55
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/mouth-tounge
+  rotate: false
+  xy: 2, 2
+  size: 99, 31
+  orig: 99, 31
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/nose
+  rotate: true
+  xy: 294, 122
+  size: 71, 34
+  orig: 71, 34
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/right-front-leg
+  rotate: true
+  xy: 396, 637
+  size: 170, 379
+  orig: 170, 379
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/rignt-eye
+  rotate: false
+  xy: 467, 351
+  size: 57, 55
+  orig: 57, 55
+  offset: 0, 0
+  index: -1
+dog2_skeleton/dog1_skin/tail
+  rotate: false
+  xy: 337, 323
+  size: 128, 281
+  orig: 128, 281
+  offset: 0, 0
+  index: -1
