@@ -1,0 +1,328 @@
+<html>
+<head>
+    <style>body, html {
+        margin: 0px;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    * { padding: 0; margin: 0; }
+    html { height: 100%; }
+    html, body {
+        min-height: 100% !important;
+        height: 100%;
+    }
+    body {
+        background-image: -webkit-linear-gradient(top, #59c7e2, #00a4d2);
+        background-image: linear-gradient(to bottom, #59c7e2, #00a4d2);
+        overflow: hidden;
+    }
+
+
+    .floor {
+        position: absolute;
+        width: 100%;
+        height: 80px;
+        background: #019243;
+        bottom: calc(0px);
+        background-image: -webkit-linear-gradient(bottom, #007832 10px, #239a51 10px);
+        background-image: linear-gradient(to top, #007832 10px, #239a51 10px);
+    }
+    .pattern {
+        position: absolute;
+        width: 100%;
+        height: 30px;
+        background-image: -webkit-linear-gradient(55deg, #41a536 50%, #059242 50%);
+        background-image: linear-gradient(35deg, #41a536 50%, #059242 50%);
+        background-size: 30px 30px;
+        bottom: calc(10px);
+    }
+
+    .cloudLeft {
+        position: absolute;
+        width: 150px;
+        height: 5px;
+        border-radius: 100px;
+        background-color: #C0EBE2;
+        top: calc(180px);
+        left: 0;
+        z-index: 1000;
+        -webkit-animation: cloudMoveLeft 15s linear infinite;
+        animation: cloudMoveLeft 15s linear infinite;
+    }
+    .cloudLeft::after {
+        position: absolute;
+        content: "";
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #C0EBE2;
+        top: -96px;
+        left: -50px;
+        box-shadow: 150px 0 0 0 #c0ebe2, 80px -50px 0 0 #c0ebe2, 80px 0px 0 0 #c0ebe2, 115px 31px 0 -30px #c0ebe2, 40px 31px 0 -30px #c0ebe2, 30px 31px 0 -30px #c0ebe2, 50px 31px 0 -30px #c0ebe2;
+    }
+    .cloudRight {
+        position: absolute;
+        width: 250px;
+        height: 5px;
+        border-radius: 100px;
+        background-color: #A6E4D5;
+        top: 300px;
+        right: 0%;
+        z-index: -10;
+        -webkit-animation: cloudMoveRight 20s linear infinite;
+        animation: cloudMoveRight 20s linear infinite;
+    }
+    .cloudRight::after {
+        position: absolute;
+        content: "";
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #A6E4D5;
+        top: -96px;
+        left: -50px;
+        box-shadow: 150px 0 0 0 #a6e4d5, 60px -60px 0 0 #a6e4d5, 250px 0px 0 0 #a6e4d5, 200px -60px 0 0 #a6e4d5, 130px -40px 0 0 #a6e4d5, 40px 0px 0 0 #a6e4d5, 80px 0px 0 0 #a6e4d5, 110px 0px 0 0 #a6e4d5, 180px 0px 0 0 #a6e4d5, 210px 0px 0 0 #a6e4d5;
+    }
+    @keyframes wheel_rotate {
+        0% {
+            -webkit-transform: rotate(0);
+            transform: rotate(0);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+    @-webkit-keyframes bucket_rotate {
+        0% {
+            -webkit-transform: rotate(0) translateX(75px) rotate(0);
+            transform: rotate(0) translateX(75px) rotate(0);
+        }
+        100% {
+            -webkit-transform: rotate(360deg) translateX(75px) rotate(-360deg);
+            transform: rotate(360deg) translateX(75px) rotate(-360deg);
+        }
+    }
+    @keyframes bucket_rotate {
+        0% {
+            -webkit-transform: rotate(0) translateX(75px) rotate(0);
+            transform: rotate(0) translateX(75px) rotate(0);
+        }
+        100% {
+            -webkit-transform: rotate(360deg) translateX(75px) rotate(-360deg);
+            transform: rotate(360deg) translateX(75px) rotate(-360deg);
+        }
+    }
+    @-webkit-keyframes cloudMoveLeft {
+        0% {
+            left: -10%;
+        }
+        100% {
+            left: 110%;
+        }
+    }
+    @keyframes cloudMoveLeft {
+        0% {
+            left: -10%;
+        }
+        100% {
+            left: 110%;
+        }
+    }
+    @-webkit-keyframes cloudMoveRight {
+        0% {
+            right: -10%;
+        }
+        100% {
+            right: 110%;
+        }
+    }
+    @keyframes cloudMoveRight {
+        0% {
+            right: -10%;
+        }
+        100% {
+            right: 110%;
+        }
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .container {
+            -moz-transform: scale(0.8, 0.8);
+            /* Moz-browsers */
+            zoom: 0.8;
+            /* Other non-webkit browsers */
+            zoom: 80%;
+            /* Webkit browsers */
+        }
+    }
+    @media (min-width: 420px) and (max-width: 798px) {
+        .container {
+            -moz-transform: scale(0.5, 0.5);
+            /* Moz-browsers */
+            zoom: 0.5;
+            /* Other non-webkit browsers */
+            zoom: 50%;
+            /* Webkit browsers */
+        }
+    }
+    @media (min-width: 100px) and (max-width: 420px) {
+        .container {
+            -moz-transform: scale(0.3, 0.3);
+            /* Moz-browsers */
+            zoom: 0.3;
+            /* Other non-webkit browsers */
+            zoom: 30%;
+            /* Webkit browsers */
+        }
+    }
+
+
+
+
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://d157l7jdn8e5sf.cloudfront.net/release/pixi.js"></script>
+    <script src="pixi-spine.js"></script>
+    <script>window.onload = function () {
+
+      var app = new PIXI.Application($(window).width(),$(window).height(), { transparent: true });
+
+      // var app = PIXI.autoDetectRenderer(800, 600, { transparent: true });
+
+      var dog1;
+      var dog2;
+      document.getElementById('area').appendChild(app.view)
+      // document.body.appendChild(app.view);
+
+      $(window).resize(function () {
+        app.renderer.resize( $(window).width(),$(window).height());
+      });
+
+
+// load spine data
+      PIXI.loader
+        .add('dog1', 'assets/animate/dog1_skeleton.json')
+        .add('dog2', 'assets/animate/dog2_skeleton.json')
+        .load(onAssetsLoaded);
+
+      app.stage.interactive = true;
+      app.stage.buttonMode = true;
+
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
+      function scaleScene() {
+        app.renderer.resize($("#area").width(), $("#area").height());
+
+
+        var bottom_position_ratio = 50/800;
+
+        dog1.position.set(app.screen.width / 4, app.screen.height - bottom_position_ratio*app.screen.height);
+        dog2.position.set(app.screen.width / 4 + app.screen.width / 2 , app.screen.height -bottom_position_ratio*app.screen.height);
+
+
+        var base_height = 800;
+        var base_scale = .25;
+        var ratio = .25 / 800;
+        dog1.scale.set(ratio*app.screen.height);
+        dog2.scale.set(ratio*app.screen.height);
+
+      }
+      $(window).resize(function () {
+        scaleScene();
+      });
+
+
+      function onAssetsLoaded(loader, res) {
+        console.log(res);
+        dog1 = new PIXI.spine.Spine(res.dog1.spineData);
+
+        // set current skin
+        dog1.skeleton.setSkinByName('dog1_skin');
+
+        // set up the mixes!
+        // dog1.stateData.setMix('neutral_breth', 'head_l', 0.2);
+        dog1.stateData.setMix('head_l', 'head_r', 0.4);
+        dog1.stateData.setMix('head_r', 'head_l', 0.4);
+
+        // play animation
+        dog1.state.setAnimation(0, 'neutral_breth', true);
+        dog1.state.setAnimation(1, 'tail_fast', true);
+
+        app.stage.addChild(dog1);
+
+        dog2 = new PIXI.spine.Spine(res.dog2.spineData);
+
+        // set current skin
+        dog2.skeleton.setSkinByName('dog1_skin');
+
+        // set up the mixes!
+        // dog1.stateData.setMix('neutral_breth', 'head_l', 0.2);
+        dog2.stateData.setMix('head_l', 'head_r', 0.4);
+        dog2.stateData.setMix('head_r', 'head_l', 0.4);
+
+
+
+        scaleScene();
+
+
+
+        // play animation
+        dog2.state.setAnimation(0, 'neutral_breth', true);
+        dog2.state.setAnimation(1, 'tail_fast_2', true);
+
+        app.stage.addChild(dog2);
+
+        app.stage.on('pointertap', function () {
+          // change current skin
+          console.log('wgt>!');
+          // dog1.stateData.setMix('head_l', 'neutral_breth', 0.4);
+          // dog1.state.setAnimation(1, 'head_l', .04);
+          // dog1.state.setAnimation(3, 'head_r', fal);
+
+          var rand = getRandomInt(2);
+          if (rand == 1) {
+            dog1.state.setAnimation(3, 'head_l', false, 0);
+          } else {
+            dog1.state.setAnimation(3, 'head_r', false, 0);
+          }
+          rand = getRandomInt(3);
+          if (rand == 1) {
+            dog2.state.setAnimation(3, 'head_l', false, 0);
+          } else if (rand == 2) {
+            dog2.state.setAnimation(3, 'head_r', false, 0);
+          } else {
+            dog2.state.setAnimation(3, 'fun', false, 0);
+          }
+
+          setTimeout(function () {
+            dog1.state.setAnimation(4, 'blink', false, 0);
+          }, getRandomInt(2000));
+          setTimeout(function () {
+            dog2.state.setAnimation(4, 'blink', false, 0);
+          }, getRandomInt(2000));
+        });
+        console.log(document.body);
+      }
+
+
+    }</script>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="floor"></div>
+    <div class="pattern"></div>
+
+    <div class="cloudLeft"></div>
+    <div class="cloudRight"></div>
+
+</div>
+
+<div id="area" style="position: absolute;top:0;left:0;right:0;bottom:0;"></div>
+
+
+</body>
+</html>

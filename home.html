@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home - CryptoPaws</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/jquery-migrate.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/update.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <style type="text/css" id="wp-custom-css">
+        .post-type-archive-library .library-lib {
+            bottom: -25px;
+        }
+
+        @media (max-width: 1199px) {
+            .post-type-archive-library .library-lib {
+                bottom: -39px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .page .banner .sky {
+                height: auto;
+            }
+
+            .home .banner .sky {
+                height: 220px;
+            }
+
+            .aboutus .banner .sky {
+                height: auto;
+            }
+        }
+
+        .water {
+            position: absolute;
+            width: 100%;
+            /*height: 80px;*/
+            /*background: #239a51;*/
+            bottom: calc(0px);
+            /*background-image: -webkit-linear-gradient(top, #007832 10px, #239a51 10px);*/
+            background-image: linear-gradient(#239a51, #007832);
+            border-top: 5px solid #008839;
+        }
+
+        .pattern {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            background-image: -webkit-linear-gradient(55deg, #41a536 50%, #059242 50%);
+            background-image: linear-gradient(35deg, #007831 50%, #239a51 50%);
+            background-size: 50px 50px;
+            top: calc(0px);
+
+        }
+    </style>
+    <!--<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png">-->
+    <!--<link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-touch-icon-60x60.png">-->
+    <!--<link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png">-->
+    <!--<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-touch-icon-76x76.png">-->
+    <!--<link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png">-->
+    <!--<link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-touch-icon-120x120.png">-->
+    <!--<link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-touch-icon-144x144.png">-->
+    <!--<link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-touch-icon-152x152.png">-->
+    <!--<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon-180x180.png">-->
+    <!--<link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32">-->
+    <!--<link rel="icon" type="image/png" href="/favicon/android-chrome-192x192.png" sizes="192x192">-->
+    <!--<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">-->
+    <!--<link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16">-->
+    <!--<link rel="manifest" href="/favicon/manifest.json">-->
+    <!--<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">-->
+    <!--<link rel="shortcut icon" href="/favicon/favicon.ico">-->
+    <!--<meta name="msapplication-TileColor" content="#da532c">-->
+    <!--<meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png">-->
+    <!--<meta name="msapplication-config" content="/favicon/browserconfig.xml">-->
+    <!--<meta name="theme-color" content="#ffffff">-->
+
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://d157l7jdn8e5sf.cloudfront.net/release/pixi.js"></script>
+    <script src="pixi-spine.js"></script>
+
+    <script>
+      window.onload = function () {
+
+        var app = new PIXI.Application($('#dogs').width(), 605, {transparent: true});
+
+        var dog1;
+        var dog2;
+        document.getElementById('dogs').appendChild(app.view)
+
+        $(window).resize(function () {
+          app.renderer.resize($('#dogs').width(), 605);
+        });
+
+
+        PIXI.loader
+          .add('dog1', 'assets/animate/dog1_skeleton.json')
+          .add('dog2', 'assets/animate/dog2_skeleton.json')
+          .load(onAssetsLoaded);
+
+        app.stage.interactive = true;
+        app.stage.buttonMode = true;
+
+        function getRandomInt(max) {
+          return Math.floor(Math.random() * Math.floor(max));
+        }
+
+        function scaleScene() {
+          app.renderer.resize($("#dogs").width(), 605);
+
+
+          var bottom_position_ratio = 100 / 605;
+
+          dog1.position.set(app.screen.width / 4, app.screen.height - bottom_position_ratio * app.screen.height);
+          dog2.position.set(app.screen.width / 4 + app.screen.width / 2, app.screen.height - bottom_position_ratio * app.screen.height);
+
+
+
+          var ratio = .20 / 605;
+          dog1.scale.set(ratio * app.screen.height);
+          dog2.scale.set(ratio * app.screen.height);
+
+        }
+
+        $(window).resize(function () {
+          scaleScene();
+        });
+
+
+        function onAssetsLoaded(loader, res) {
+          dog1 = new PIXI.spine.Spine(res.dog1.spineData);
+          dog1.skeleton.setSkinByName('dog1_skin');
+          dog1.stateData.setMix('head_l', 'head_r', 0.4);
+          dog1.stateData.setMix('head_r', 'head_l', 0.4);
+          dog1.state.setAnimation(0, 'neutral_breth', true);
+          dog1.state.setAnimation(1, 'tail_fast', true);
+          app.stage.addChild(dog1);
+          dog2 = new PIXI.spine.Spine(res.dog2.spineData);
+          dog2.skeleton.setSkinByName('dog1_skin');
+          dog2.stateData.setMix('head_l', 'head_r', 0.4);
+          dog2.stateData.setMix('head_r', 'head_l', 0.4);
+          scaleScene();
+          dog2.state.setAnimation(0, 'neutral_breth', true);
+          dog2.state.setAnimation(1, 'tail_fast_2', true);
+          app.stage.addChild(dog2);
+
+          app.stage.on('pointertap', function () {
+            var rand = getRandomInt(2);
+            if (rand == 1) {
+              dog1.state.setAnimation(3, 'head_l', false, 0);
+            } else {
+              dog1.state.setAnimation(3, 'head_r', false, 0);
+            }
+            rand = getRandomInt(3);
+            if (rand == 1) {
+              dog2.state.setAnimation(3, 'head_l', false, 0);
+            } else if (rand == 2) {
+              dog2.state.setAnimation(3, 'head_r', false, 0);
+            } else {
+              dog2.state.setAnimation(3, 'fun', false, 0);
+            }
+
+            setTimeout(function () {
+              dog1.state.setAnimation(4, 'blink', false, 0);
+            }, getRandomInt(2000));
+            setTimeout(function () {
+              dog2.state.setAnimation(4, 'blink', false, 0);
+            }, getRandomInt(2000));
+          });
+          console.log(document.body);
+        }
+
+
+      }
+    </script>
+</head>
+<body class="home page ms-guest ms-0">
+<!--[if lt IE 10]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<!-- header -->
+<header class="header">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a href="home.html" id="logo"><img src="assets/img/logo.svg" alt="CryptoPaws"/></a>
+                <ul class="nav navbar-nav navbar-left nav-social-xs-visible">
+                    <li>
+                        <a href="https://twitter.com/cryptopaws_"><i class="fa fa-fw fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/CryptoPaws/"><i class="fa fa-fw fa-facebook"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.github.com/CryptoPaws/"><i class="fa fa-fw fa-github"></i></a>
+                    </li>
+                </ul>
+                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collection of nav links and other content for toggling -->
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <ul id="menu-main-menu" class="nav navbar-nav">
+                    <li class="menu-item active">
+                        <a title="Home" href="home.html">Home</a></li>
+                    <li class="menu-item">
+                        <a title="Animation" href="animate.html">Animation</a></li>
+                    <li class="menu-item">
+                        <a title="Roadmap" href="roadmap.html">Roadmap</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right hidden-xs">
+                    <li>
+                        <a href="https://twitter.com/cryptopaws_"><i class="fa fa-fw fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/CryptoPaws/"><i class="fa fa-fw fa-facebook"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://www.github.com/CryptoPaws/"><i class="fa fa-fw fa-github"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<section class="banner" >
+    <div style="position: absolute; top: 0; bottom: 0; right: 0; left: 0; z-index: 5;" id="dogs">&nbsp;</div>
+    <div class="sky">
+        <div style="position: absolute;top:0;right:0;left:0;bottom:0;background-image: -webkit-linear-gradient(top, #59c7e2, #00a4d2);background-image: linear-gradient(to bottom, #59c7e2, #00a4d2);"></div>
+        <div id="area" style="height: 264px;" >&nbsp;Test</div>
+        <div class="container">
+            <img src="assets/img/cloud.png"
+                 class="cloud c1">
+            <img src="assets/img/cloud.png"
+                 class="cloud c2">
+            <img src="assets/img/cloud.png"
+                 class="cloud c3">
+            <img src="assets/img/cloud.png"
+                 class="cloud c4">
+            <img src="assets/img/cloud.png"
+                 class="cloud c5">
+
+
+
+        </div>
+    </div>
+    <div class="water">
+        <div class="pattern"></div>
+        <div class="container" style="padding-top:80px;">
+
+
+            <h2>This is NOT your typical dapp</h2>
+            <h4 style="color:#aaa;">A new implementation of cutting edge tech for a new world.</h4>
+        </div>
+    </div>
+</section>
+<!-- end banner -->
+
+<!-- getting started -->
+<!-- end getting started -->
+
+<!-- what we do -->
+<section class="what-we-do">
+    <div class="container">
+        <h1 class="heading">Welcome to Your Global Future
+            <small>Kawa Kawa Learning Studio helps you learn how to communicate confidently wherever you go for study,
+                work and play
+            </small>
+        </h1>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="mission-wrapper">
+                    <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/wwd_01.svg" alt=""
+                         height="139">
+                </div>
+                <h3>Get language & Culture power
+                    <small>Meet new people, explore new places and build a global career. Open up a whole new world of
+                        opportunity for yourseft.
+                    </small>
+                </h3>
+            </div>
+            <div class="col-sm-4">
+                <div class="mission-wrapper">
+                    <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/wwd_02.svg" alt=""
+                         height="142">
+                </div>
+                <h3>Be a better communicator
+                    <small>Want to make friends and influence people? Learn how to connect with new people across
+                        cultures.
+                    </small>
+                </h3>
+            </div>
+            <div class="col-sm-4">
+                <div class="mission-wrapper">
+                    <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/wwd_03.svg" alt=""
+                         height="149">
+                </div>
+                <h3>Turbocharge your career
+                    <small>Improve your workplace relationships and increase your global career opportunities.</small>
+                </h3>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end what we do -->
+
+<!-- Call to action -->
+<section class="call-to-action">
+    <div class="container">
+        <h1 class="heading">
+            <span>we help you go global - for study, work & play</span>
+            <p>Whether you’re looking to live, study or pursue your career abroad, Kawa Kawa is there to help you at
+                every step of the way. Join us to develop & build the skills that will get you ready to live your
+                dreams.</p>
+        </h1>
+        <div class="row is-table-row"
+             style="margin:60px 0 0">
+            <div class="col-sm-6 ">
+                <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/language_edu.png"
+                     style="width: auto; max-width: 100%; max-height:244px"/>
+            </div>
+            <div class="col-sm-6 text-left">
+                <h2>LANGUAGE EDUCATION</h2>
+                <p>Build up your language skills in Japanese, Chinese & English with our online courses &
+                    mentorship.</p>
+                <a class="btn btn-orange" href="https://kawakawalearningstudio.com/program/language-education/">Learn
+                    more</a>
+            </div>
+        </div>
+        <div class="row is-table-row"
+             style="margin:80px 0 0">
+            <div class="col-sm-6 col-sm-push-6">
+                <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/cultura_exchange.svg"
+                     style="width: auto; max-width: 100%; max-height:288px"/>
+            </div>
+            <div class="col-sm-6 col-sm-pull-6 right">
+                <h2>Study abroad</h2>
+                <p>Live & study while you explore new places, people & opportunities.</p>
+                <script src="//static.leadpages.net/leadboxes/current/embed.js" async defer></script>
+                <button data-leadbox-popup="14744f173f72a2:17b7a213d946dc"
+                        data-leadbox-domain="kawakawalearningstudio.lpusercontent.com"
+                        style="background: #32C88C;border-color: #32C88C;border-radius: 20px;color: #FFFFFF;display: inline-block;vertical-align: middle;padding: 16px 32px;min-width: 192px;border: 1px solid #32C88C;font-size: 1rem;font-family: Helvetica, Arial, sans-serif;text-align: center;outline: 0;line-height: 1;cursor: pointer;-webkit-transition: background 0.3s, color 0.3s, border 0.3s;transition: background 0.3s, color 0.3s, border 0.3s;  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6);">
+                    Click here to subscribe
+                </button>
+            </div>
+        </div>
+        <div class="row is-table-row"
+             style="margin:80px 0 0">
+            <div class="col-sm-6 ">
+                <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/comunication-skill.png"
+                     style="width: auto; max-width: 100%; max-height:306px"/>
+            </div>
+            <div class="col-sm-6 text-left">
+                <h2>cultural exchange</h2>
+                <p>Take part in our cultural exchange programmes to experience different cultures first-hand.</p>
+                <script src="//static.leadpages.net/leadboxes/current/embed.js" async defer></script>
+                <button data-leadbox-popup="1408ef173f72a2:17b7a213d946dc"
+                        data-leadbox-domain="kawakawalearningstudio.lpusercontent.com"
+                        style="background: #32C88C;border-color: #32C88C;border-radius: 20px;color: #FFFFFF;display: inline-block;vertical-align: middle;padding: 16px 32px;min-width: 192px;border: 1px solid #32C88C;font-size: 1rem;font-family: Helvetica, Arial, sans-serif;text-align: center;outline: 0;line-height: 1;cursor: pointer;-webkit-transition: background 0.3s, color 0.3s, border 0.3s;transition: background 0.3s, color 0.3s, border 0.3s;  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6);">
+                    Click here to subscribe
+                </button>
+            </div>
+        </div>
+        <div class="row is-table-row"
+             style="margin:90px 0 0">
+            <div class="col-sm-6 col-sm-push-6">
+                <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/communication-skill.png"
+                     style="width: auto; max-width: 100%; max-height:198px"/>
+            </div>
+            <div class="col-sm-6 col-sm-pull-6 right">
+                <h2>Interpersonal communication skills</h2>
+                <p>Ready to take on the world? Get vital interpersonal communication skills that will help you succeed
+                    internationally.</p>
+                <script src="//static.leadpages.net/leadboxes/current/embed.js" async defer></script>
+                <button data-leadbox-popup="1432279f3f72a2:17b7a213d946dc"
+                        data-leadbox-domain="kawakawalearningstudio.lpages.co"
+                        style="background: #32C88C;border-color: #32C88C;border-radius: 20px;color: #FFFFFF;display: inline-block;vertical-align: middle;padding: 16px 32px;min-width: 192px;border: 1px solid #32C88C;font-size: 1rem;font-family: Helvetica, Arial, sans-serif;text-align: center;outline: 0;line-height: 1;cursor: pointer;-webkit-transition: background 0.3s, color 0.3s, border 0.3s;transition: background 0.3s, color 0.3s, border 0.3s;  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6);">
+                    Click here to subscribe
+                </button>
+            </div>
+        </div>
+        <div class="row is-table-row"
+             style="margin:90px 0 0">
+            <div class="col-sm-6 ">
+                <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/study_abroad.svg"
+                     style="width: auto; max-width: 100%; max-height:260px"/>
+            </div>
+            <div class="col-sm-6 text-left">
+                <h2>Business communications & etiquette</h2>
+                <p>Become a savvy cross-cultural communicator and never be socially awkward in business settings.</p>
+                <script src="//static.leadpages.net/leadboxes/current/embed.js" async defer></script>
+                <button data-leadbox-popup="144d0b573f72a2:17b7a213d946dc"
+                        data-leadbox-domain="kawakawalearningstudio.lpusercontent.com"
+                        style="background: #32C88C;border-color: #32C88C;border-radius: 20px;color: #FFFFFF;display: inline-block;vertical-align: middle;padding: 16px 32px;min-width: 192px;border: 1px solid #32C88C;font-size: 1rem;font-family: Helvetica, Arial, sans-serif;text-align: center;outline: 0;line-height: 1;cursor: pointer;-webkit-transition: background 0.3s, color 0.3s, border 0.3s;transition: background 0.3s, color 0.3s, border 0.3s;  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6);">
+                    Click here to subscribe
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end: call to action -->
+
+<!-- discover -->
+<section class="discover">
+    <div class="container">
+        <p>Join us and let's make your global future a reality together!</p>
+        <a href="http://kawakawalearningstudio.com/library/"
+           class="btn btn-info">Sign Up Now</a>
+    </div>
+</section>
+<!-- end discover -->
+
+<!-- recent episodes -->
+<section class="recent-episodes">
+    <div class="container">
+        <h1 class="heading">MOST RECENT POSTS
+            <small>Read our blog for awesome language hacks, study abroad tips,cultural insights, interpersonal
+                communications advice and business ettiquette...
+            </small>
+        </h1>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="aitem">
+                    <a href="https://kawakawalearningstudio.com/blog/in-depth-analysis-how-to-write-descriptive-description-paragraphs-and-essays/">
+                        <div class="cover"
+                             style="background-image:url(https://kawakawalearningstudio.com/wp-content/uploads/2018/01/img_041_HowtoWriteDescriptionParagraphs-600x340.jpg)"></div>
+                    </a>
+                    <div class="caption">
+                        <h4>
+                            <a href="https://kawakawalearningstudio.com/blog/in-depth-analysis-how-to-write-descriptive-description-paragraphs-and-essays/"
+                               title="In-Depth Analysis: How to Write Descriptive/ Description Paragraphs and Essays">In-Depth
+                                Analysis: How to Write Descriptive/ Descriptio...</a>
+                        </h4>
+                        <ul class="list-inline">
+                            <li><i class="fa fa-calendar fa-fw"></i> January 30, 2018</li>
+                            <li>
+                                <i class="fa fa-comments fa-fw"></i> 0
+                            </li>
+                        </ul>
+                        <p>In the last blog post, I gave a short summary on all (if not most)&#8230;</p>
+                        <a href="https://kawakawalearningstudio.com/blog/in-depth-analysis-how-to-write-descriptive-description-paragraphs-and-essays/">Read
+                            more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="aitem">
+                    <a href="https://kawakawalearningstudio.com/blog/how-to-use-plain-form-of-japanese-verbs-present-future-and-negative-present-future/">
+                        <div class="cover"
+                             style="background-image:url(https://kawakawalearningstudio.com/wp-content/uploads/2018/01/img_040_PlainForm_Present-600x340.jpg)"></div>
+                    </a>
+                    <div class="caption">
+                        <h4>
+                            <a href="https://kawakawalearningstudio.com/blog/how-to-use-plain-form-of-japanese-verbs-present-future-and-negative-present-future/"
+                               title="How to Use the Plain Forms of Japanese Verbs (Present/Future and Negative Present/Future)">How
+                                to Use the Plain Forms of Japanese Verbs (Present/F...</a>
+                        </h4>
+                        <ul class="list-inline">
+                            <li><i class="fa fa-calendar fa-fw"></i> January 29, 2018</li>
+                            <li>
+                                <i class="fa fa-comments fa-fw"></i> 0
+                            </li>
+                        </ul>
+                        <p>This article is a continuation of our series of articles on Japanese verbs and
+                            verb&#8230;</p>
+                        <a href="https://kawakawalearningstudio.com/blog/how-to-use-plain-form-of-japanese-verbs-present-future-and-negative-present-future/">Read
+                            more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="aitem">
+                    <a href="https://kawakawalearningstudio.com/blog/how-to-write-an-english-essay/">
+                        <div class="cover"
+                             style="background-image:url(https://kawakawalearningstudio.com/wp-content/uploads/2017/12/img_040_WriteAnEnglishEssay-600x340.jpg)"></div>
+                    </a>
+                    <div class="caption">
+                        <h4><a href="https://kawakawalearningstudio.com/blog/how-to-write-an-english-essay/"
+                               title="How to Write An English Essay: What You Need to Know">How to Write An English
+                            Essay: What You Need to Know</a>
+                        </h4>
+                        <ul class="list-inline">
+                            <li><i class="fa fa-calendar fa-fw"></i> January 23, 2018</li>
+                            <li>
+                                <i class="fa fa-comments fa-fw"></i> 0
+                            </li>
+                        </ul>
+                        <p>Welcome to Kawa Kawa’s first English blog post! In this first blog post, we shall investigate&#8230;</p>
+                        <a href="https://kawakawalearningstudio.com/blog/how-to-write-an-english-essay/">Read more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="aitem">
+                    <a href="https://kawakawalearningstudio.com/blog/use-mashita-masendeshita-will-make-sound-polite/">
+                        <div class="cover"
+                             style="background-image:url(https://kawakawalearningstudio.com/wp-content/uploads/2017/12/img_039_PoliteForm_Mashita-600x340.jpg)"></div>
+                    </a>
+                    <div class="caption">
+                        <h4>
+                            <a href="https://kawakawalearningstudio.com/blog/use-mashita-masendeshita-will-make-sound-polite/"
+                               title="How to Use Mashita and Masen Deshita to Make Yourself Sound Polite">How to Use
+                                Mashita and Masen Deshita to Make Yourself S...</a>
+                        </h4>
+                        <ul class="list-inline">
+                            <li><i class="fa fa-calendar fa-fw"></i> January 22, 2018</li>
+                            <li>
+                                <i class="fa fa-comments fa-fw"></i> 0
+                            </li>
+                        </ul>
+                        <p>This article is the second half of our two-part -Masu Form article series! First, let’s&#8230;</p>
+                        <a href="https://kawakawalearningstudio.com/blog/use-mashita-masendeshita-will-make-sound-polite/">Read
+                            more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="aitem">
+                    <a href="https://kawakawalearningstudio.com/blog/what-you-need-to-know-about-japanese-verb-stem/">
+                        <div class="cover"
+                             style="background-image:url(https://kawakawalearningstudio.com/wp-content/uploads/2017/12/img_036_Verb_Stems_Japanese-600x340.jpg)"></div>
+                    </a>
+                    <div class="caption">
+                        <h4>
+                            <a href="https://kawakawalearningstudio.com/blog/what-you-need-to-know-about-japanese-verb-stem/"
+                               title="What You Need to Know About Japanese Verb Stems">What You Need to Know About
+                                Japanese Verb Stems</a>
+                        </h4>
+                        <ul class="list-inline">
+                            <li><i class="fa fa-calendar fa-fw"></i> January 15, 2018</li>
+                            <li>
+                                <i class="fa fa-comments fa-fw"></i> 0
+                            </li>
+                        </ul>
+                        <p>Knowing how to take a Japanese verb and turn it into stem form is very&#8230;</p>
+                        <a href="https://kawakawalearningstudio.com/blog/what-you-need-to-know-about-japanese-verb-stem/">Read
+                            more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="aitem">
+                    <a href="https://kawakawalearningstudio.com/blog/japanese-polite-form-first-thing-need-know/">
+                        <div class="cover"
+                             style="background-image:url(https://kawakawalearningstudio.com/wp-content/uploads/2017/12/img_038_PoliteForm-600x340.jpg)"></div>
+                    </a>
+                    <div class="caption">
+                        <h4>
+                            <a href="https://kawakawalearningstudio.com/blog/japanese-polite-form-first-thing-need-know/"
+                               title="Japanese Polite Form Is the First Thing You Need to Know">Japanese Polite Form Is
+                                the First Thing You Need to Kno...</a>
+                        </h4>
+                        <ul class="list-inline">
+                            <li><i class="fa fa-calendar fa-fw"></i> January 8, 2018</li>
+                            <li>
+                                <i class="fa fa-comments fa-fw"></i> 0
+                            </li>
+                        </ul>
+                        <p>This article is an introduction to Japanese verbs, and Japanese verb conjugation. We will be&#8230;</p>
+                        <a href="https://kawakawalearningstudio.com/blog/japanese-polite-form-first-thing-need-know/">Read
+                            more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-right">
+            <a href="https://kawakawalearningstudio.com/blog/"
+               class="all-episodes">All posts ></a>
+        </div>
+    </div>
+</section>
+<!-- end recent episodes -->
+
+<!-- testimonial -->
+<section class="testimonial">
+    <div class="container">
+        <div class="owl-carousel owl-theme">
+            <div class="item">
+                <div class="person">
+                    <div class="person-img"
+                         style="background-image:url(https://kawakawalearningstudio.com/wp-content/uploads/2015/12/Lachlan-Goddard-300x300.jpg)"></div>
+                </div>
+                <blockquote>
+                    <div data-full-text="My experiences with Queenie have always been highly positive. Queenie has created a relaxed and comfortable environment in which ideas and conversation can flow freely, giving me the confidence to utilise my mandarin skills in my day to day to life."
+                         data-short-text="My experiences with Queenie have always been highly positive. Queenie has created a relaxed and..."
+                         class="less">
+                        <p>My experiences with Queenie have always been highly positive. Queenie has created a relaxed
+                            and&#8230;</p>
+                    </div>
+                    <footer>Lachlan Goddard, Place Projects Brisbane, Australia www.placeprojects.com.au</footer>
+                </blockquote>
+            </div>
+            <div class="item">
+                <div class="person">
+                    <div class="person-img"
+                         style="background-image:url(https://kawakawalearningstudio.com/wp-content/uploads/2015/12/Jake-Kelder-300x300.jpg)"></div>
+                </div>
+                <blockquote>
+                    <div data-full-text="My time with Queenie Kawabe has significantly upgraded my understanding of Mandarin and Chinese culture. The lessons were adapted to my ability and honed in on my areas of interest. I would highly recommend Queenie Kawabe to anyone looking to further their understanding of Mandarin and Chinese culture."
+                         data-short-text="My time with Queenie Kawabe has significantly upgraded my understanding of Mandarin and Chinese culture...."
+                         class="less">
+                        <p>My time with Queenie Kawabe has significantly upgraded my understanding of Mandarin and
+                            Chinese culture&#8230;.</p>
+                    </div>
+                    <footer>Jake Kelder, founder of Yuppie Palace Brisbane, Australia www.yuppiepalace.com.au</footer>
+                </blockquote>
+            </div>
+            <div class="item">
+                <div class="person">
+                    <div class="person-img"
+                         style="background-image:url(https://kawakawalearningstudio.com/wp-content/uploads/2015/12/Patrick-Ross-300x300.jpg)"></div>
+                </div>
+                <blockquote>
+                    <div data-full-text="I’ve been learning Cantonese because my partner’s family is from Hong Kong, so they often speak Cantonese at home. I’ve picked up Cantonese a lot faster than I was expecting with Queenie. I studied Mandarin for 3 years at high school, and never really got anywhere with it, whereas in just 10 months of Cantonese study I’ve progressed to a level where I can understand a lot of what native speakers say. Classes have always been very hands-on, and I was speaking and listening in Cantonese from the very first lesson. This has really accelerated my progress. I hope to surprise my partner soon with my knowledge of Cantonese. I would highly recommend Queenie for anybody seeking to learn Cantonese."
+                         data-short-text="I’ve been learning Cantonese because my partner’s family is from Hong Kong, so they often..."
+                         class="less">
+                        <p>I’ve been learning Cantonese because my partner’s family is from Hong Kong, so they often&#8230;</p>
+                    </div>
+                    <footer>Patrick Ross, PHD of QUT, Brisbane, Australia</footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end testimonial -->
+
+<section id="partner-logo">
+    <div class="container">
+        <div class="owl-carousel owl-theme">
+            <div class="item">
+                <a href="http://www.earmuffsforkids.com">
+                    <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/logo-1x.png" alt="">
+                </a>
+            </div>
+            <div class="item">
+                <a href="">
+                    <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/WechatIMG12.jpeg" alt="">
+                </a>
+            </div>
+            <div class="item">
+                <a href="http://www.junoteam.com/">
+                    <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/juno-logo.png" alt="">
+                </a>
+            </div>
+            <div class="item">
+                <a href="">
+                    <img src="https://kawakawalearningstudio.com/wp-content/uploads/2017/11/null-lines-logo.png" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- guide to start -->
+<section class="guide-to-start">
+    <div class="container">
+        <div class="bookshelf">
+            <img src="https://kawakawalearningstudio.com/wp-content/themes/beelory/dist/images/book.png">
+        </div>
+        <h1 class="heading">Ready to Start Your Global Future Today?</h1>
+        <form class="form-inline text-center">
+            <div class="form-group"><a href="http://kawakawalearningstudio.com/library/" target="_blank"
+                                       rel="nofollow" class="btn btn-info"><img
+                    src="https://kawakawalearningstudio.com/wp-content/themes/beelory/dist/images/bookmark.png"
+                    class="bookmark">Get Started</a></div>
+        </form>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade customModal" id="subscribe-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header"
+                 style="background-image:url(https://kawakawalearningstudio.com/wp-content/uploads/2017/11/Newsletter.jpg)"></div>
+            <div class="modal-body">
+                <div class="modal-body-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3>EXPAND YOUR WORLD.<br/>
+                        EXPAND YOUR SKILLS.</h3>
+                    <p>Empower yourself for your global future. Get exclusive access to our free library &amp; digest
+                        &#8211; full of helpful tips &amp; insights. Build your language and communications skills or
+                        get to know new cultures. <strong>Join ‘Kawa Nation’ today&#8230; Subscribe to our FREE,
+                            exclusive online library &amp; digest</strong>.</p>
+                    <form id="modal-subscribe-form" action="" class="form-inline">
+                        <p>Enter your email below & start your journey today....</p>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="email" placeholder="Your Email Address">
+                            <input type="hidden" name="action" value="subscribe">
+                        </div>
+                        <button type="submit" class="btn btn-info"><img
+                                src="https://kawakawalearningstudio.com/wp-content/themes/beelory/dist/images/library-download.png"
+                                class="bookmark"> Submit
+                        </button>
+                        <p class="text-success" id="subscribe-result" style="display: none"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <ul class="list-inline social">
+                    <li><a href="https://t"><i class="fa fa-fw fa-twitter"></i></a>
+                    </li>
+                    <li><a href="https://www.facebook.com/CryptoPaws/"><i class="fa fa-fw fa-facebook"></i></a>
+                    </li>
+                    <li><a href=""><i class="fa fa-fw fa-instagram"></i></a>
+                    </li>
+                    <li><a href=""><i class="fa fa-fw fa-pinterest"></i></a>
+                    </li>
+                    <li><a href="https://www.youtube.com/channel/UCrlzS6A3uWM-1PQeGsMQi0g?view_as=subscriber"><i
+                            class="fa fa-fw fa-youtube-play"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-sm-4 text-center">
+                <p>©2015 <a href="">CryptoPaws</a>. All Rights Reserved</p>
+            </div>
+            <div class="col-sm-4 text-right">
+                <p class="designby">Designed &amp; Developed by <a href="http://junoteam.com"
+                                                                   target="_blank">JunoTeam</a></p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="loader-wrap">
+    <div class="loader">
+        <div class="loader-inner">Loading..</div>
+        <p>Please wait a moment &hellip;</p>
+    </div>
+</div>
+</body>
+</html>
